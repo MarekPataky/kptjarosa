@@ -20,7 +20,7 @@ public class Main {
     port(Integer.valueOf(System.getenv("PORT")));
     staticFileLocation("/public");
 
-    get("/hello", (req, res) -> "Hello World");
+    get("/hello", (req, res) -> "Hello World My Friend");
 
     get("/", (request, response) -> {
             Map<String, Object> attributes = new HashMap<>();
@@ -31,7 +31,6 @@ public class Main {
 
     get("/db", (req, res) -> {
       Connection connection = null;
-      String aa;
       Map<String, Object> attributes = new HashMap<>();
       try {
         connection = DatabaseUrl.extract().getConnection();
