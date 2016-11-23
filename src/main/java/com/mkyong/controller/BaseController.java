@@ -1,6 +1,8 @@
 package com.mkyong.controller;
 
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,13 +19,16 @@ public class BaseController {
     private final static org.slf4j.Logger logger = LoggerFactory.getLogger(BaseController.class);
     private final static Map<String, String> aa = System.getenv();
 
+    @Autowired
+    private Environment env;
+
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String welcome(ModelMap model) {
-        model.addAttribute("message", "Welcome --" + System.getenv("TEST") + " --" + aa);
+        model.addAttribute("message", "Welcome --" + env.getProperty("test") + " ** " + env.getProperty("test2"));
         model.addAttribute("counter", ++counter);
         logger.debug("[welcome] counter : {}", counter);
 
-        // Spring uses InternalResourceViewResolver and return back index.jsp
         return VIEW_INDEX;
 
     }
